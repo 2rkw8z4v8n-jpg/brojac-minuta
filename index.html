@@ -848,9 +848,10 @@ function renderLog() {
   $("sum").innerHTML = `${fmt(total)}<small>min</small>`;
   const h = Math.floor(total / 60), m = Math.round(total % 60);
   $("hrs").innerHTML = `${h}:${String(m).padStart(2, "0")}<small>h</small>`;
-  $("cnt").textContent = rows.length;
-  $("cnt").className = "big" + (rows.length >= 28 ? " good" : "");
-  $("cnt").parentElement.title = `${rows.length} od 28 zadataka`;
+  const nS = rows.filter(e => e.kind === "smetnja").length;
+  $("cnt").textContent = nS;
+  $("cnt").className = "big" + (nS >= 28 ? " good" : "");
+  $("cnt").parentElement.title = `${nS} od 28 zadataka (broje se samo smetnje)`;
   const effV = total / TARGET * 100;
   $("eff").innerHTML = `${Math.round(effV)}<small>%</small>`;
   $("eff").className = "big " + (effV >= 100 ? "good" : rows.length ? "low" : "");
@@ -951,7 +952,7 @@ const MJESECI = ["Siječanj","Veljača","Ožujak","Travanj","Svibanj","Lipanj","
 const hm = t => { const r = Math.round(t); return `${Math.floor(r / 60)}:${String(r % 60).padStart(2, "0")} h`; };
 const hrDate = d => { const [y, m, dd] = d.split("-"); return `${+dd}. ${+m}. ${y}.`; };
 function agg(rows) {
-  const a = { t: 0, n: rows.length, c: { smetnja: 0, ukljucenje: 0, poziv: 0, dodatno: 0 }, s: 0, u: 0, us: 0, p: 0, days: new Set() };
+  const a = { t: 0, n: rows.filter(e => e.kind === "smetnja").length, c: { smetnja: 0, ukljucenje: 0, poziv: 0, dodatno: 0 }, s: 0, u: 0, us: 0, p: 0, days: new Set() };
   for (const e of rows) { a.t += e.min + (e.solved ? BONUS : 0); a.c[e.kind] = (a.c[e.kind] || 0) + 1; if (e.solved) a.s++; if (e.kind === "smetnja") { if (e.prebacen) a.p++; else { a.u++; if (e.solved) a.us++; } } a.days.add(e.day); }
   return a;
 }
