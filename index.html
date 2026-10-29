@@ -114,6 +114,9 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline
 header{display:grid;gap:16px;align-items:stretch}
 .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .topbar > div{min-width:0}
+.topbar .userchip{position:absolute;top:calc(14px + env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));z-index:5}
+@media (max-width:1300px){.topbar{padding-right:190px}}
+@media (max-width:520px){.topbar{padding-right:0;padding-top:58px}}
 .prebrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
 .pseg{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--bg);border:1px solid var(--line);border-radius:999px}
 .pseg button{font:inherit;font-weight:600;font-size:13.5px;border:0;background:transparent;color:var(--muted);padding:6px 16px;border-radius:999px;cursor:pointer}
@@ -272,7 +275,6 @@ span.bonus{cursor:default;display:inline-block}
   <section class="stats" id="stats" hidden aria-label="Statistika">
     <div class="stats-head">
       <h2>Statistika</h2>
-      <button class="btn ghost" id="statsClose">Zatvori</button>
     </div>
     <div class="cards" id="statCards"></div>
     <div class="bars-wrap">
@@ -755,7 +757,7 @@ const parse = raw => raw.split("\n").map(l => { const i = l.lastIndexOf("|"); re
 const TASKS = { smetnja: parse(SMETNJA_RAW), ukljucenje: parse(UKLJ_RAW) };
 const BONUS = 20;
 const TARGET = 415;
-const pct = (a, b) => b ? Math.round(a / b * 100) + " %" : "–";
+const pct = (a, b) => b ? fmt(a / b * 100) + " %" : "–";
 const LABEL = { smetnja: "Smetnja", ukljucenje: "Uključenje", poziv: "Poziv", dodatno: "Dodatno" };
 const MANUAL = { poziv: { name: "Poziv s tehničarem", btn: "Dodaj poziv", note: "" }, dodatno: { name: "Dodatni posao", btn: "Dodaj posao", note: "" } };
 const KEY = "brojac-minuta-v1";
@@ -853,11 +855,11 @@ function renderLog() {
   $("cnt").className = "big" + (nS >= 28 ? " good" : "");
   $("cnt").parentElement.title = `${nS} od 28 zadataka (broje se samo smetnje)`;
   const effV = total / TARGET * 100;
-  $("eff").innerHTML = `${Math.round(effV)}<small>%</small>`;
+  $("eff").innerHTML = `${fmt(effV)}<small>%</small>`;
   $("eff").className = "big " + (effV >= 100 ? "good" : rows.length ? "low" : "");
   $("eff").parentElement.title = `${fmt(total)} od ${TARGET} min`;
   const sm = rows.filter(e => e.kind === "smetnja" && !e.prebacen), sol = sm.filter(e => e.solved).length;
-  $("udal").innerHTML = `${sm.length ? Math.round(sol / sm.length * 100) : 0}<small>%</small>`;
+  $("udal").innerHTML = `${sm.length ? fmt(sol / sm.length * 100) : 0}<small>%</small>`;
   $("udal").parentElement.title = sm.length ? `${sol} od ${sm.length} smetnji riješeno` : "Danas još nema smetnji";
   for (const k of ["smetnja", "ukljucenje", "poziv", "dodatno"]) { const n = rows.filter(e => e.kind === k).length; const el = $("kc-" + k); el.textContent = n; el.dataset.z = n ? "0" : "1"; el.title = `Danas: ${n}`; }
   const log = $("log");
@@ -992,8 +994,8 @@ function toggleStats(open) {
 let donePeriod = "dan";
 function statPills(list) {
   const a = agg(list);
-  const eff = Math.round(a.t / ((a.days.size || 1) * TARGET) * 100);
-  const ud = a.u ? Math.round(a.us / a.u * 100) : 0;
+  const eff = fmt(a.t / ((a.days.size || 1) * TARGET) * 100);
+  const ud = a.u ? fmt(a.us / a.u * 100) : 0;
   return `<span class="gs"><span class="pill">Minute: ${fmt(a.t)} min</span><span class="pill">Zadaci: ${a.n}</span><span class="pill">Efikasnost: ${eff} %</span><span class="pill">Udaljeni: ${ud} %</span></span>`;
 }
 function renderDone() {
@@ -1065,7 +1067,7 @@ document.querySelectorAll("#donePeriod button").forEach(b => b.onclick = () => {
   renderDone();
 });
 $("statsBtn").onclick = () => toggleStats($("stats").hidden);
-$("statsClose").onclick = () => toggleStats(false);
+
 
 const initial = n => (n || "?").trim().charAt(0).toUpperCase() || "?";
 function renderUser() {

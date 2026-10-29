@@ -1,5 +1,5 @@
 // Brojač minuta – offline podrška
-const CACHE = "brojac-minuta-v2";
+const CACHE = "brojac-minuta-v5";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png"];
 
 self.addEventListener("install", e => {
