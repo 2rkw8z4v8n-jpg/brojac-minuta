@@ -117,14 +117,44 @@ header{display:grid;gap:16px;align-items:stretch}
 .topbar .userchip{position:absolute;top:calc(14px + env(safe-area-inset-top, 0px));right:max(16px, env(safe-area-inset-right, 0px));z-index:5}
 @media (max-width:1300px){.topbar{padding-right:190px}}
 @media (max-width:520px){.topbar{padding-right:0;padding-top:58px}}
+.nl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;line-height:1.3}
+#log .ename{display:grid;gap:6px}
+#log .t{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;line-height:1.3}
+.cardslot{display:inline-flex}
+.copybtn{font:inherit;font-family:var(--sans);font-size:10.5px;font-weight:600;display:inline-flex;align-items:center;gap:4px;margin-left:8px;padding:1px 7px;border-radius:5px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;line-height:1.5}
+.copybtn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.copybtn:hover{border-color:var(--rocket);color:var(--rocket)}
+.dgroup .t{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0}
+.nw{white-space:nowrap}
+.cardslot .cardbtn{margin-left:8px;font-size:10.5px;padding:1px 7px;border-radius:5px}
+.nl .bonus{margin-left:8px;font-size:10.5px;padding:1px 5px;border-radius:5px}
+.bonus.cardbtn{border:1px solid var(--rocket);background:var(--rocket);color:#fff}
+.bonus.cardbtn:hover{filter:brightness(1.08)}
+.cardedit{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.cardedit label{font-size:12px;font-weight:600;color:var(--muted)}
+.cardedit input{font:inherit;font-family:var(--mono);font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);width:150px;max-width:100%}
+.mini-btn{font:inherit;font-size:12px;font-weight:600;padding:5px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.mini-btn.ok{background:var(--rocket);border-color:var(--rocket);color:#fff}
+.cardbox{display:grid;gap:6px;padding:12px;border:1.5px solid var(--good);background:var(--good-soft);border-radius:10px}
+.cardbox label{font-weight:700;font-size:13px}
+.cardbox .search{background:var(--surface)}
+.choice.picked{box-shadow:0 0 0 2px var(--good)}
 .prebrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
 .pseg{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--bg);border:1px solid var(--line);border-radius:999px}
 .pseg button{font:inherit;font-weight:600;font-size:13.5px;border:0;background:transparent;color:var(--muted);padding:6px 16px;border-radius:999px;cursor:pointer}
 .pseg button[aria-checked="true"]{background:var(--rocket-soft);color:var(--rocket);font-weight:700;box-shadow:0 0 0 1.5px var(--rocket)}
+.pausebar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-weight:600}
+.pausebar b{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.pausebar.now{border-color:var(--rocket);background:var(--rocket-soft);color:var(--rocket)}
+.pausebar.done{color:var(--muted)}
+#pauseBtn.set{border-color:var(--rocket);color:var(--rocket)}
+#pauseBtn{order:-1;margin-right:auto}
+@media (max-width:620px){#pauseBtn{margin-right:0}}
 .navbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 @media (max-width:620px){.navbtns{display:grid;grid-template-columns:repeat(3,1fr)}.navbtns .btn{padding:10px 6px}}
 .big.good{color:var(--good)}
 .big.low{color:var(--rocket)}
+#sum.hit,#cnt.hit,#eff.hit,#udal.hit{color:var(--rocket)}
 .userchip{font:inherit;display:flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);cursor:pointer;text-align:left}
 .userchip:hover{border-color:var(--rocket)}
 .userchip .un{display:grid;line-height:1.15}
@@ -163,7 +193,8 @@ header{display:grid;gap:16px;align-items:stretch}
 .empty{padding:16px;color:var(--muted);text-align:center}
 .call{display:grid;gap:10px}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.row input[type=number]{font:inherit;font-family:var(--mono);width:90px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.row #callMin{width:150px}
+.row input[type=number],.row #callMin{font:inherit;font-family:var(--mono);width:90px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
 .btn{font:inherit;font-weight:600;padding:10px 16px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
 .btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
 .btn.danger{background:var(--warn)}
@@ -185,6 +216,13 @@ span.bonus{cursor:default;display:inline-block}
 .stats{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:18px;min-width:0}
 .tabs.seg{grid-template-columns:repeat(4,auto)}
 .tabs.seg button{padding:8px 14px}
+.daytog{font:inherit;font-weight:inherit;font-size:inherit;display:inline-flex;align-items:center;gap:6px;background:transparent;border:0;color:var(--fg);cursor:pointer;padding:2px 4px 2px 0;border-radius:6px}
+.daytog svg{width:18px;height:18px;padding:2px;border-radius:5px;background:var(--rocket-soft);fill:none;stroke:var(--rocket);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+.daytog[aria-expanded="true"] svg{transform:rotate(90deg)}
+.daytog:hover{color:var(--rocket)}
+.dgroup .mh .daytog{color:var(--rocket);letter-spacing:inherit;text-transform:inherit}
+.dgroup .mh .daytog svg{background:var(--surface)}
+@media (prefers-reduced-motion:reduce){.daytog svg{transition:none}}
 .dgroup .dh{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;padding:6px 0 6px 10px;border-left:3px solid var(--rocket);border-bottom:1px solid var(--line);font-weight:600;font-size:13px}
 .dgroup .gh,.dgroup .mh{flex-wrap:wrap;gap:8px;align-items:center}
 .gs{display:inline-flex;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.05)}
@@ -225,14 +263,12 @@ span.bonus{cursor:default;display:inline-block}
     <div class="topbar">
       <div>
         <h1>Brojač minuta</h1>
-        <div class="sub">Zadaci i vrijednosti prema Listi minuta (TMS Portal)</div>
       </div>
       <button class="userchip" id="userBtn" title="Promijeni korisnika"><span class="av" id="userAv">?</span><span class="un"><span class="lbl">Korisnik</span><span id="userName">Odaberi</span></span></button>
     </div>
     <div class="total">
       <div class="daybox"><div class="lbl">Danas</div><div class="today" id="day"></div></div>
       <div><div class="lbl">Ukupno</div><div class="big" id="sum">0<small>min</small></div></div>
-      <div><div class="lbl">Sati</div><div class="big" id="hrs">0:00<small>h</small></div></div>
       <div><div class="lbl">Zadataka</div><div class="big" id="cnt">0</div></div>
       <div title="Minute danas u odnosu na cilj od 415 min"><div class="lbl">Efikasnost</div><div class="big" id="eff">0<small>%</small></div></div>
       <div title="Postotak riješenih smetnji danas"><div class="lbl">Udaljeni</div><div class="big" id="udal">0<small>%</small></div></div>
@@ -266,7 +302,7 @@ span.bonus{cursor:default;display:inline-block}
         <button data-p="mjesec" aria-selected="false">Mjesec</button>
         <button data-p="godina" aria-selected="false">Godina</button>
       </div>
-      <input class="search" id="doneQ" type="search" placeholder="Pretraži riješene zadatke…" autocomplete="off" style="flex:1;min-width:200px">
+      <input class="search" id="doneQ" type="search" placeholder="Pretraži zadatak, karticu ili datum (npr. 13.01.2026)…" autocomplete="off" style="flex:1;min-width:200px">
     </div>
     <div class="sub" id="doneInfo"></div>
     <div id="doneList" style="display:grid;gap:14px"></div>
@@ -317,8 +353,8 @@ span.bonus{cursor:default;display:inline-block}
       <div class="call" id="callArea" hidden>
         <div class="sub" id="callNote" hidden>Poziv s tehničarem nema vrijednost u listi, pa minute upisuješ sam.</div>
         <div class="row">
-          <label for="callMin">Minuta</label>
-          <input type="number" id="callMin" min="0" step="any" inputmode="decimal" placeholder="npr. 5">
+          <label for="callMin">Vrijeme</label>
+          <input type="text" id="callMin" inputmode="decimal" autocomplete="off" placeholder="min,sek npr. 1,30">
           <button class="btn" id="addCall">Dodaj poziv</button>
         </div>
       </div>
@@ -354,6 +390,13 @@ span.bonus{cursor:default;display:inline-block}
       <button class="choice yes" id="askYes"><span>Riješena</span><b><span id="askYesMin"></span> min</b><small>uključeno +20 min</small></button>
       <button class="choice" id="askNo"><span>Nije riješena</span><b><span id="askBase"></span> min</b><small>bez dodatka</small></button>
     </div>
+    <form id="cardForm" class="cardbox" hidden>
+      <label for="cardNo">Broj kartice</label>
+      <div class="row">
+        <input id="cardNo" class="search" type="text" inputmode="numeric" autocomplete="off" placeholder="npr. 12345678" style="flex:1;min-width:0;width:auto">
+        <button class="btn" id="cardSave" type="submit">Spremi</button>
+      </div>
+    </form>
     <button class="btn ghost" id="askCancel">Odustani</button>
   </div>
 </div>
@@ -757,7 +800,7 @@ const parse = raw => raw.split("\n").map(l => { const i = l.lastIndexOf("|"); re
 const TASKS = { smetnja: parse(SMETNJA_RAW), ukljucenje: parse(UKLJ_RAW) };
 const BONUS = 20;
 const TARGET = 415;
-const pct = (a, b) => b ? fmt(a / b * 100) + " %" : "–";
+const pct = (a, b) => b ? fmtP(a / b * 100) + " %" : "–";
 const LABEL = { smetnja: "Smetnja", ukljucenje: "Uključenje", poziv: "Poziv", dodatno: "Dodatno" };
 const MANUAL = { poziv: { name: "Poziv s tehničarem", btn: "Dodaj poziv", note: "" }, dodatno: { name: "Dodatni posao", btn: "Dodaj posao", note: "" } };
 const KEY = "brojac-minuta-v1";
@@ -778,8 +821,19 @@ let state;
 function loadState() {
   state = { entries: [], callMin: 5, favs: [] };
   if (!profiles.active) return;
-  try { const s = JSON.parse(localStorage.getItem(dataKey())); if (s && Array.isArray(s.entries)) state = Object.assign(state, s); } catch (e) {}
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem(dataKey())); if (s && Array.isArray(s.entries)) state = Object.assign(state, s); } catch (e) {}
   if (!Array.isArray(state.favs)) state.favs = [];
+  if (!state.msFix) {
+    // stari pozivi/dodatni poslovi upisani kao min,sek (npr. 1,3 = 1 min 30 s) bili su spremljeni kao decimale
+    for (const e of state.entries) {
+      if (e.kind !== "poziv" && e.kind !== "dodatno") continue;
+      const m = String(e.min).match(/^(\d+)\.(\d{1,2})$/);
+      if (m) { const sec = parseInt(m[2].padEnd(2, "0"), 10); if (sec < 60) e.min = parseInt(m[1], 10) + sec / 60; }
+    }
+    state.msFix = true;
+    if (s) { try { localStorage.setItem(dataKey(), JSON.stringify(state)); } catch (e) {} }
+  }
 }
 loadState();
 const ROCKET = '<svg viewBox="0 0 24 24" aria-hidden="true"><path class="b" d="M12 2.5c2.9 2.3 4.4 5.8 4.4 9.6v4.2H7.6v-4.2c0-3.8 1.5-7.3 4.4-9.6z"/><path class="b" d="M7.6 12.8l-3 3.1v3.4l3-1.6zM16.4 12.8l3 3.1v3.4l-3-1.6z"/><path class="b" d="M10.2 18.4h3.6l-.9 3h-1.8z"/><circle class="w" cx="12" cy="9.4" r="1.7"/></svg>';
@@ -795,7 +849,18 @@ setInterval(checkNewDay, 60000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) checkNewDay(); });
 $("callMin").value = "";
 
-const fmt = n => (Math.round(n * 100) / 100).toString().replace(".", ",");
+const fmtP = n => (Math.round(n * 100) / 100).toString().replace(".", ",");
+const fmt = n => { const s = Math.round(n * 60); const m = Math.floor(s / 60), ss = s % 60; return ss ? `${m},${String(ss).padStart(2, "0")}` : `${m}`; };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function parseMinSec(str) {
+  const v = String(str).trim();
+  if (!v) return null;
+  const m = v.match(/^(\d+)(?:[.,:](\d{1,2}))?$/);
+  if (!m) return null;
+  const sec = m[2] ? parseInt(m[2].padEnd(2, "0"), 10) : 0;
+  if (sec >= 60) return null;
+  return parseInt(m[1], 10) + sec / 60;
+}
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d");
 
 function renderList() {
@@ -833,9 +898,9 @@ function renderList() {
   }
 }
 
-function addEntry(kind, name, min, solved, prebacen) {
+function addEntry(kind, name, min, solved, prebacen, card) {
   const d = new Date();
-  state.entries.push({ id: Date.now() + Math.random(), day: today(), time: d.toTimeString().slice(0, 5), kind, name, min, solved: !!solved, prebacen: !!prebacen });
+  state.entries.push({ id: Date.now() + Math.random(), day: today(), time: d.toTimeString().slice(0, 5), kind, name, min, solved: !!solved, prebacen: !!prebacen, card: card || "" });
   save(); renderLog();
   const added = state.entries[state.entries.length - 1];
   toast(`Dodano: ${name} · ${fmt(min + (solved ? BONUS : 0))} min`, "Poništi", () => { removeEntry(added.id, false); toast("Zadatak poništen."); });
@@ -849,17 +914,20 @@ function renderLog() {
   const total = rows.reduce((s, e) => s + e.min + (e.solved ? BONUS : 0), 0);
   $("sum").innerHTML = `${fmt(total)}<small>min</small>`;
   const h = Math.floor(total / 60), m = Math.round(total % 60);
-  $("hrs").innerHTML = `${h}:${String(m).padStart(2, "0")}<small>h</small>`;
+
   const nS = rows.filter(e => e.kind === "smetnja").length;
   $("cnt").textContent = nS;
-  $("cnt").className = "big" + (nS >= 28 ? " good" : "");
+  $("cnt").className = "big" + (nS >= 28 ? " hit" : "");
   $("cnt").parentElement.title = `${nS} od 28 zadataka (broje se samo smetnje)`;
   const effV = total / TARGET * 100;
-  $("eff").innerHTML = `${fmt(effV)}<small>%</small>`;
-  $("eff").className = "big " + (effV >= 100 ? "good" : rows.length ? "low" : "");
+  $("eff").innerHTML = `${fmtP(effV)}<small>%</small>`;
+  $("eff").className = "big" + (effV >= 100 ? " hit" : "");
+  $("sum").className = "big" + (total >= TARGET ? " hit" : "");
+  $("sum").parentElement.title = `${fmt(total)} od ${TARGET} min`;
   $("eff").parentElement.title = `${fmt(total)} od ${TARGET} min`;
   const sm = rows.filter(e => e.kind === "smetnja" && !e.prebacen), sol = sm.filter(e => e.solved).length;
-  $("udal").innerHTML = `${sm.length ? fmt(sol / sm.length * 100) : 0}<small>%</small>`;
+  $("udal").innerHTML = `${sm.length ? fmtP(sol / sm.length * 100) : 0}<small>%</small>`;
+  $("udal").className = "big" + (sm.length && sol / sm.length * 100 >= 40 ? " hit" : "");
   $("udal").parentElement.title = sm.length ? `${sol} od ${sm.length} smetnji riješeno` : "Danas još nema smetnji";
   for (const k of ["smetnja", "ukljucenje", "poziv", "dodatno"]) { const n = rows.filter(e => e.kind === k).length; const el = $("kc-" + k); el.textContent = n; el.dataset.z = n ? "0" : "1"; el.title = `Danas: ${n}`; }
   const log = $("log");
@@ -869,17 +937,58 @@ function renderLog() {
     const row = document.createElement("div");
     row.className = "entry";
     const chip = `<span class="chip ${e.kind === "smetnja" ? "s" : MANUAL[e.kind] ? "p" : ""}">${LABEL[e.kind]}</span>`;
-    row.innerHTML = `${chip}<div class="ename"><div class="n"></div><div class="t">${e.time}${e.prebacen ? " · prebačen" : ""}</div></div><span class="min">${fmt(e.min + (e.solved ? BONUS : 0))}</span><button class="del" title="Ukloni zadatak">Ukloni</button>`;
+    row.innerHTML = `${chip}<div class="ename"><div class="nl"><span class="n"></span></div><div class="t">${e.time}${e.card ? `<span class="nw">&nbsp;· kartica ${esc(e.card)}</span>${COPYBTN}` : ""}<span class="cardslot"></span>${e.prebacen ? " · prebačen" : ""}</div></div><span class="min">${fmt(e.min + (e.solved ? BONUS : 0))}</span><button class="del" title="Ukloni zadatak">Ukloni</button>`;
     row.querySelector(".n").textContent = e.name;
     if (e.kind === "smetnja" && e.solved) {
       const b = document.createElement("span");
       b.className = "bonus on";
       b.textContent = "Riješena +20";
-      row.querySelector(".t").appendChild(b);
+      row.querySelector(".nl").appendChild(b);
+      const ed = document.createElement("button");
+      ed.className = "bonus cardbtn";
+      ed.textContent = e.card ? "Promijeni karticu" : "Upiši karticu";
+      ed.onclick = () => editCard(e, row);
+      row.querySelector(".cardslot").appendChild(ed);
     }
+    if (e.card) row.querySelector(".copybtn").onclick = () => copyCard(e.card);
     row.querySelector(".del").onclick = () => removeEntry(e.id, true);
     log.appendChild(row);
   }
+}
+
+const COPYBTN = '<button type="button" class="copybtn" title="Kopiraj broj kartice" aria-label="Kopiraj broj kartice"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>Kopiraj</button>';
+function copyCard(text) {
+  const done = () => toast("Kopirano: " + text);
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+    ta.remove();
+    ok ? done() : toast("Kopiranje nije uspjelo. Broj kartice: " + text);
+  };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+}
+function editCard(e, row) {
+  const box = document.createElement("form");
+  box.className = "cardedit";
+  box.innerHTML = '<label>Broj kartice</label><input type="text" inputmode="numeric" autocomplete="off"><button class="mini-btn ok" type="submit">Spremi</button><button class="mini-btn" type="button">Odustani</button>';
+  const inp = box.querySelector("input");
+  inp.id = "card-" + String(e.id).replace(/\W/g, "");
+  box.querySelector("label").htmlFor = inp.id;
+  inp.value = e.card || "";
+  box.addEventListener("submit", ev => {
+    ev.preventDefault();
+    const v = inp.value.trim();
+    if (!v) { toast("Broj kartice ne može biti prazan."); inp.focus(); return; }
+    if (v !== e.card) { e.card = v; save(); toast("Broj kartice promijenjen."); }
+    renderLog();
+  });
+  box.querySelector("button[type=button]").onclick = () => renderLog();
+  inp.onkeydown = ev => { if (ev.key === "Escape") { ev.stopPropagation(); renderLog(); } };
+  row.querySelector(".ename").appendChild(box);
+  row.querySelectorAll(".cardbtn").forEach(b => { b.hidden = true; });
+  inp.focus(); inp.select();
 }
 
 function removeEntry(id, offerUndo) {
@@ -911,18 +1020,26 @@ function askSolved(t) {
   $("askName").textContent = t.n;
   $("askBase").textContent = fmt(t.m);
   $("askYesMin").textContent = fmt(t.m + BONUS);
+  $("cardForm").hidden = true; $("cardNo").value = "";
+  $("askYes").classList.remove("picked");
   $("ask").hidden = false;
   $("askYes").focus();
 }
 function closeAsk() { $("ask").hidden = true; pending = null; }
-$("askYes").onclick = () => { const t = pending; closeAsk(); addEntry("smetnja", t.n, t.m, true, preb); };
+$("askYes").onclick = () => { $("askYes").classList.add("picked"); $("cardForm").hidden = false; $("cardNo").focus(); };
+$("cardForm").addEventListener("submit", ev => {
+  ev.preventDefault();
+  const card = $("cardNo").value.trim();
+  if (!card) { toast("Upiši broj kartice."); $("cardNo").focus(); return; }
+  const t = pending; closeAsk(); addEntry("smetnja", t.n, t.m, true, preb, card);
+});
 $("askNo").onclick = () => { const t = pending; closeAsk(); addEntry("smetnja", t.n, t.m, false, preb); };
 $("askCancel").onclick = closeAsk;
 $("ask").onclick = e => { if (e.target === $("ask")) closeAsk(); };
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("ask").hidden) closeAsk(); });
 $("addCall").onclick = () => {
-  const v = parseFloat(String($("callMin").value).replace(",", "."));
-  if (!(v >= 0)) { toast("Upiši broj minuta."); return; }
+  const v = parseMinSec($("callMin").value);
+  if (v === null) { toast("Upiši vrijeme kao minute,sekunde (npr. 1,30). Sekunde moraju biti manje od 60."); return; }
   const mk = MANUAL[tab] ? tab : "poziv";
   addEntry(mk, MANUAL[mk].name, v, false); $("callMin").value = ""; $("callMin").focus();
 };
@@ -992,17 +1109,45 @@ function toggleStats(open) {
   if (open) { renderStats(); $("stats").scrollIntoView({ behavior: "smooth", block: "start" }); }
 }
 let donePeriod = "dan";
-function statPills(list) {
+function statPills(list, avg) {
   const a = agg(list);
-  const eff = fmt(a.t / ((a.days.size || 1) * TARGET) * 100);
-  const ud = a.u ? fmt(a.us / a.u * 100) : 0;
-  return `<span class="gs"><span class="pill">Minute: ${fmt(a.t)} min</span><span class="pill">Zadaci: ${a.n}</span><span class="pill">Efikasnost: ${eff} %</span><span class="pill">Udaljeni: ${ud} %</span></span>`;
+  const minPill = avg ? `Prosjek: ${fmt(a.days.size ? a.t / a.days.size : 0)} min/dan` : `Minute: ${fmt(a.t)} min`;
+  const eff = fmtP(a.t / ((a.days.size || 1) * TARGET) * 100);
+  const ud = a.u ? fmtP(a.us / a.u * 100) : 0;
+  return `<span class="gs"><span class="pill">${minPill}</span><span class="pill">Zadaci: ${a.n}</span><span class="pill">Efikasnost: ${eff} %</span><span class="pill">Udaljeni: ${ud} %</span></span>`;
+}
+const openDays = new Set();
+function dayToggle(day, q) {
+  const open = !!q || openDays.has(day);
+  return `<button type="button" class="daytog" data-day="${day}" aria-expanded="${open}" title="${open ? "Zatvori" : "Otvori"} zadatke ovog dana"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>${hrDate(day)}</button>`;
+}
+function searchText(e) {
+  const [y, m, d] = e.day.split("-");
+  const dates = [`${+d}.${+m}.${y}.`, `${d}.${m}.${y}.`, e.day, `${MJESECI[+m - 1]} ${y}`];
+  return { text: norm([e.name, e.card || "", `${MJESECI[+m - 1]} ${y}`].join(" ")), dates: dates.map(norm) };
+}
+// 13,01,2026 · 13.01.2026. · 13/01/2026 · 13 01 2026 · 13-01-2026 · 13.01. → 13.1.2026. / 13.1.
+function normDates(q) {
+  return q.replace(/(?<![\d])(\d{1,2})\s*[.,\/\- ]\s*(\d{1,2})(?:\s*[.,\/\- ]\s*(\d{4}))?\.?(?![\d])/g, (all, d, m, y) => {
+    if (+d < 1 || +d > 31 || +m < 1 || +m > 12) return all;
+    return ` ${+d}.${+m}.${y ? y + "." : ""} `;
+  });
+}
+function matchQuery(e, q) {
+  const s = searchText(e);
+  const words = normDates(q).split(/\s+/).filter(Boolean);
+  return words.every(w => /^\d{1,4}[.\-]/.test(w) ? s.dates.some(d => d.startsWith(w)) : (s.text.includes(w) || s.dates.some(d => d.includes(w))));
+}
+const openMonths = new Set();
+function monthToggle(ym, label, q) {
+  const open = !!q || openMonths.has(ym);
+  return `<button type="button" class="daytog" data-month="${ym}" aria-expanded="${open}" title="${open ? "Zatvori" : "Otvori"} dane ovog mjeseca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>${label}</button>`;
 }
 function renderDone() {
   const day = today();
-  const pre = { dan: day, mjesec: day.slice(0, 7), godina: day.slice(0, 4), sve: "" }[donePeriod];
+  const pre = { dan: "", mjesec: day.slice(0, 7), godina: day.slice(0, 4), sve: "" }[donePeriod];
   const q = norm($("doneQ").value.trim());
-  const rows = state.entries.filter(e => e.day.startsWith(pre) && (!q || q.split(/\s+/).every(w => norm(e.name).includes(w))));
+  const rows = state.entries.filter(e => e.day.startsWith(pre) && (!q || matchQuery(e, q)));
   const total = rows.reduce((s, e) => s + e.min + (e.solved ? BONUS : 0), 0);
   $("doneInfo").textContent = `${rows.length} zadataka · ${fmt(total)} min (${hm(total)})`;
   const list = $("doneList");
@@ -1017,7 +1162,7 @@ function renderDone() {
     const g = document.createElement("div");
     g.className = "dgroup";
     const gt = groups[d].reduce((s, e) => s + e.min + (e.solved ? BONUS : 0), 0);
-    g.innerHTML = `<div class="gh"><span>${glabel(d)}</span>${statPills(groups[d])}</div>`;
+    g.innerHTML = `<div class="gh">${byDay ? dayToggle(d, q) : donePeriod === "mjesec" ? monthToggle(d, glabel(d), q) : `<span>${glabel(d)}</span>`}${statPills(groups[d], !byDay)}</div>`;
     let curMonth = null, curDay = null;
     for (const e of groups[d].slice().sort((a, b) => (b.day + b.time).localeCompare(a.day + a.time))) {
       if (donePeriod === "godina" && e.day.slice(0, 7) !== curMonth) {
@@ -1025,24 +1170,32 @@ function renderDone() {
         const mt = groups[d].filter(x => x.day.startsWith(curMonth)).reduce((s, x) => s + x.min + (x.solved ? BONUS : 0), 0);
         const mh = document.createElement("div");
         mh.className = "mh";
-        mh.innerHTML = `<span>${MJESECI[+curMonth.slice(5, 7) - 1]}</span>${statPills(groups[d].filter(x => x.day.startsWith(curMonth)))}`;
+        mh.innerHTML = `${monthToggle(curMonth, MJESECI[+curMonth.slice(5, 7) - 1], q)}${statPills(groups[d].filter(x => x.day.startsWith(curMonth)), true)}`;
         g.appendChild(mh);
       }
       if ((donePeriod === "godina" || donePeriod === "mjesec") && e.day !== curDay) {
         curDay = e.day;
         const dh = document.createElement("div");
         dh.className = "dh";
-        dh.innerHTML = `<span>${hrDate(curDay)}</span>${statPills(groups[d].filter(x => x.day === curDay))}`;
+        dh.innerHTML = `${dayToggle(curDay, q)}${statPills(groups[d].filter(x => x.day === curDay))}`;
+        dh.hidden = !(q || openMonths.has(curDay.slice(0, 7)));
         g.appendChild(dh);
       }
       const row = document.createElement("div");
       row.className = "entry";
-      row.innerHTML = `<span class="chip ${e.kind === "smetnja" ? "s" : MANUAL[e.kind] ? "p" : ""}">${LABEL[e.kind]}</span><div class="ename"><div class="n"></div><div class="t">${byDay || donePeriod === "godina" || donePeriod === "mjesec" ? "" : hrDate(e.day) + " "}${e.time}${e.solved ? " · riješena +20" : ""}${e.prebacen ? " · prebačen" : ""}</div></div><span class="min">${fmt(e.min + (e.solved ? BONUS : 0))}</span>`;
+      row.innerHTML = `<span class="chip ${e.kind === "smetnja" ? "s" : MANUAL[e.kind] ? "p" : ""}">${LABEL[e.kind]}</span><div class="ename"><div class="n"></div><div class="t">${byDay || donePeriod === "godina" || donePeriod === "mjesec" ? "" : hrDate(e.day) + " "}${e.time}${e.solved ? " · riješena +20" : ""}${e.card ? `<span class="nw">&nbsp;· kartica ${esc(e.card)}</span>${COPYBTN}` : ""}${e.prebacen ? " · prebačen" : ""}</div></div><span class="min">${fmt(e.min + (e.solved ? BONUS : 0))}</span>`;
+      if (e.card) row.querySelector(".copybtn").onclick = () => copyCard(e.card);
       row.querySelector(".n").textContent = e.name;
+      row.hidden = !(q || (openDays.has(e.day) && (byDay || openMonths.has(e.day.slice(0, 7)))));
       g.appendChild(row);
     }
     list.appendChild(g);
   }
+  list.querySelectorAll(".daytog").forEach(b => b.onclick = () => {
+    const set = b.dataset.month ? openMonths : openDays, k = b.dataset.month || b.dataset.day;
+    set.has(k) ? set.delete(k) : set.add(k);
+    renderDone();
+  });
 }
 function toggleDone(open) {
   $("done").hidden = !open;
